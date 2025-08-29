@@ -1,0 +1,194 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+:root {
+  --background: oklch(1 0 0); /* #ffffff */
+  --foreground: oklch(0.05 0 0); /* #0a0a0a - very dark text for maximum visibility */
+  --card: oklch(0.99 0.01 0); /* #fafafa */
+  --card-foreground: oklch(0.05 0 0); /* #0a0a0a - very dark text on cards */
+  --popover: oklch(1 0 0); /* #ffffff */
+  --popover-foreground: oklch(0.05 0 0); /* #0a0a0a - very dark text in popovers */
+  /* Updated primary to indigo-500 */
+  --primary: oklch(0.55 0.2 264); /* #6366f1 - indigo-500 */
+  --primary-foreground: oklch(1 0 0); /* #ffffff */
+  /* Updated secondary to emerald-500 */
+  --secondary: oklch(0.64 0.16 162); /* #10b981 - emerald-500 */
+  --secondary-foreground: oklch(1 0 0); /* #ffffff */
+  --muted: oklch(0.96 0.01 0); /* #f5f5f5 */
+  --muted-foreground: oklch(0.25 0 0); /* #404040 - much darker muted text */
+  /* Updated accent to gradient blend of indigo and emerald */
+  --accent: oklch(0.6 0.18 213); /* blend color */
+  --accent-foreground: oklch(0.05 0 0); /* #0a0a0a - very dark accent text */
+  --destructive: oklch(0.577 0.245 27.325);
+  --destructive-foreground: oklch(1 0 0);
+  --border: oklch(0.8 0.01 0); /* #cccccc - much darker borders for better contrast */
+  --input: oklch(0.98 0.01 0); /* #fafafa - slightly off-white for better visibility */
+  --ring: oklch(0.55 0.2 264 / 0.5); /* indigo with opacity */
+  /* Updated chart colors to indigo-emerald theme */
+  --chart-1: oklch(0.55 0.2 264); /* #6366f1 - indigo-500 */
+  --chart-2: oklch(0.64 0.16 162); /* #10b981 - emerald-500 */
+  --chart-3: oklch(0.6 0.18 213); /* blend color */
+  --chart-4: oklch(0.5 0.22 264); /* #4f46e5 - indigo-600 */
+  --chart-5: oklch(0.58 0.18 162); /* #059669 - emerald-600 */
+  --radius: 0.75rem;
+  --sidebar: oklch(1 0 0); /* #ffffff */
+  --sidebar-foreground: oklch(0.05 0 0); /* #0a0a0a - very dark sidebar text */
+  --sidebar-primary: oklch(0.99 0.01 0); /* #fafafa */
+  --sidebar-primary-foreground: oklch(0.05 0 0); /* #0a0a0a - very dark sidebar primary text */
+  --sidebar-accent: oklch(0.55 0.2 264); /* #6366f1 */
+  --sidebar-accent-foreground: oklch(1 0 0); /* #ffffff */
+  --sidebar-border: oklch(0.8 0.01 0); /* #cccccc - much darker sidebar borders */
+  --sidebar-ring: oklch(0.55 0.2 264 / 0.5); /* indigo with opacity */
+}
+
+/* Updated dark theme with deep slate background and modern colors */
+.dark {
+  --background: oklch(0.1 0.02 264); /* Deep slate with slight blue tint */
+  --foreground: oklch(0.98 0 0); /* White text */
+  --card: oklch(0.15 0.03 264); /* Card background with better visibility */
+  --card-foreground: oklch(0.98 0 0); /* White text on cards */
+  --popover: oklch(0.15 0.03 264);
+  --popover-foreground: oklch(0.98 0 0);
+  --primary: oklch(0.65 0.22 264); /* Brighter indigo for dark mode */
+  --primary-foreground: oklch(0.98 0 0);
+  --secondary: oklch(0.7 0.18 162); /* Brighter emerald for dark mode */
+  --secondary-foreground: oklch(0.98 0 0); /* White text for better visibility */
+  --muted: oklch(0.2 0.02 264); /* Muted slate */
+  --muted-foreground: oklch(0.75 0.01 264); /* Lighter muted text for better visibility */
+  --accent: oklch(0.65 0.2 213);
+  --accent-foreground: oklch(0.98 0 0); /* White text for better visibility */
+  --destructive: oklch(0.65 0.2 15);
+  --destructive-foreground: oklch(0.98 0 0);
+  --border: oklch(0.25 0.03 264); /* More visible borders */
+  --input: oklch(0.18 0.03 264); /* Slightly lighter input for better visibility */
+  --ring: oklch(0.65 0.22 264 / 0.5);
+  --chart-1: oklch(0.65 0.22 264); /* Brighter indigo */
+  --chart-2: oklch(0.7 0.18 162); /* Emerald */
+  --chart-3: oklch(0.65 0.2 213); /* Purple blend */
+  --chart-4: oklch(0.6 0.2 180); /* Cyan */
+  --chart-5: oklch(0.65 0.2 162); /* Emerald variant */
+  --sidebar: oklch(0.12 0.02 264);
+  --sidebar-foreground: oklch(0.98 0 0);
+  --sidebar-primary: oklch(0.65 0.22 264);
+  --sidebar-primary-foreground: oklch(0.98 0 0);
+  --sidebar-accent: oklch(0.2 0.02 264);
+  --sidebar-accent-foreground: oklch(0.98 0 0);
+  --sidebar-border: oklch(0.25 0.03 264);
+  --sidebar-ring: oklch(0.65 0.22 264 / 0.5);
+}
+
+
+
+@layer base {
+  * {
+    border-color: var(--border);
+    outline-color: rgba(99, 102, 241, 0.5);
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 150ms;
+  }
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+  }
+  
+  /* Ensure form fields are visible in both themes */
+  input, select, textarea {
+    background-color: var(--input);
+    border-color: var(--border);
+    color: var(--foreground);
+    backdrop-filter: blur(4px);
+  }
+  
+  input::placeholder, textarea::placeholder {
+    color: var(--muted-foreground);
+  }
+  
+  /* Ensure dropdown content is visible */
+  .dark [data-radix-popper-content-wrapper] {
+    background-color: var(--card);
+    border-color: var(--border);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+  }
+  
+  [data-radix-popper-content-wrapper] {
+    background-color: var(--popover);
+    border-color: var(--border);
+    color: var(--popover-foreground);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Ensure Select components are visible */
+  [data-radix-select-trigger] {
+    background-color: var(--input);
+    border-color: var(--border);
+    color: var(--foreground);
+  }
+  
+  [data-radix-select-content] {
+    background-color: var(--card) !important;
+    border-color: var(--border);
+    color: var(--card-foreground) !important;
+    backdrop-filter: blur(8px);
+  }
+  
+  [data-radix-select-item] {
+    color: var(--card-foreground);
+  }
+  
+  [data-radix-select-item][data-highlighted] {
+    background-color: var(--primary);
+    color: var(--primary-foreground);
+  }
+  
+  /* Dialog content background */
+  [data-radix-dialog-content] {
+    background-color: var(--card) !important;
+    color: var(--card-foreground) !important;
+    backdrop-filter: blur(8px);
+  }
+  
+  /* Ensure sidebar navigation is visible */
+  .sidebar-nav a {
+    color: var(--sidebar-foreground);
+  }
+  
+  .sidebar-nav a:hover {
+    background-color: var(--sidebar-accent);
+    color: var(--sidebar-accent-foreground);
+  }
+  
+  .sidebar-nav a.active {
+    background-color: var(--sidebar-primary);
+    color: var(--sidebar-primary-foreground);
+  }
+}
+
+/* Added custom gradient and glow utilities for modern dark theme */
+@layer utilities {
+  .gradient-primary {
+    background: linear-gradient(135deg, oklch(0.6 0.22 264), oklch(0.65 0.2 300), oklch(0.7 0.18 162));
+  }
+
+  .gradient-text {
+    background: linear-gradient(135deg, oklch(0.6 0.22 264), oklch(0.65 0.2 300), oklch(0.7 0.18 162));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .glow-card {
+    box-shadow: 0 0 0 1px oklch(0.2 0.02 264), 0 4px 6px -1px oklch(0.05 0 0 / 0.1), 0 2px 4px -1px
+      oklch(0.05 0 0 / 0.06), 0 0 20px oklch(0.6 0.22 264 / 0.1);
+  }
+
+  .glow-hover {
+    transition: all 0.3s ease;
+  }
+
+  .glow-hover:hover {
+    box-shadow: 0 0 0 1px oklch(0.25 0.02 264), 0 8px 25px -5px oklch(0.05 0 0 / 0.2), 0 4px 6px -2px
+      oklch(0.05 0 0 / 0.1), 0 0 30px oklch(0.6 0.22 264 / 0.2);
+    transform: translateY(-2px);
+  }
+}
